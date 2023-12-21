@@ -13,10 +13,18 @@ export default function Login() {
       setUser({...user,[e.target.name]:e.target.value});
     }
   const handeleLogin = async() =>{
+    if(!user.email || !user.password){
+      alert("Hay dien thong tin");
+      return;
+    }
+   try {
     const res = await publicAxios.post('/login',user);
     localStorage.setItem('token',res.data.token);
-    alert(res.data.messager);
+    alert(res.data.message);
     navigate('/todoList')
+   } catch (error) {
+    alert(error.response.data.message)
+   }
 
   }
 
@@ -29,7 +37,7 @@ export default function Login() {
         <label>Email</label>
       </div>
       <div className="user-box">
-        <input required="" name="password" type="text" onChange={handleGetValue} />
+        <input required="" name="password" type="password" onChange={handleGetValue} />
         <label>Password</label>
       </div>
       <button className="text-white" onClick={handeleLogin} >

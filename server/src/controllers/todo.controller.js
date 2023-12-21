@@ -3,7 +3,7 @@ const { addTodos, renderTodo, updateTodo, deleteTodo } = require("../repository/
     const { nameTodo } = req.body;
     await addTodos(nameTodo);
     res.status(201).json({
-      message: "Admin them thanh cong",
+      message: "Add ok",
     });
   }
   async function render(req, res) {
